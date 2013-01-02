@@ -1,14 +1,7 @@
----  
-### NEW YEAR  
-### GAME JAM  
-### 2012-13  
----  
-## Info:  
+## Info:
 text  
-  
-## Gameplay:  
+## Gameplay:
 text  
-  
-## Credits:  
+## Credits:
 text  
 
