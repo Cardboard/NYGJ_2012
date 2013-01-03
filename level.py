@@ -27,8 +27,8 @@ class Level:
 		for block in self.blocks: # check each block for a collision
 			if player.lane in block.lane:
 				if block.x > player.x and block.x < (player.x + self.scale):
+					player.hurt()
 					self.blocks.remove(block)
-					#END_GAME_AND_SHOW_SCORE!
 
 class Block:
 	def __init__(self, scale, width, height, speed, lane, color):
@@ -38,5 +38,5 @@ class Block:
 		self.speed = speed
 		self.lane = [lane]
 		self.color = color
-		for i in range(lane, height+lane-1):
-			self.lane.append(i)
+		if height == 2:
+			self.lane.append(lane+1)
