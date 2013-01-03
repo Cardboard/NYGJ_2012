@@ -10,7 +10,7 @@ from pygame.locals import *
 import player
 import level
 
-SCALE = 64
+SCALE = 32
 WIDTH = SCALE * 20 
 
 class Game:
@@ -125,7 +125,7 @@ while True:
 	# WHILE AT THE ENDGAME SCREEN
 	if running == False:
 		scoreText = ('final score: %s' % str(round(game.score)).split('.')[0])
-		endText = font.render(scoreText + '    play again? (spacebar)', 1, (100,100,100))
+		endText = font.render(scoreText + '    play again? (r)', 1, (100,100,100))
 		game.surface.blit(endText, (SCALE, SCALE))
 		pygame.display.update()
 		if keys[pygame.K_r]:
