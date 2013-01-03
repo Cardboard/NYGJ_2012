@@ -10,7 +10,7 @@ from pygame.locals import *
 import player
 import level
 
-SCALE = 32
+SCALE = 64
 WIDTH = SCALE * 20 
 
 class Game:
@@ -31,6 +31,7 @@ class Game:
 				(255, 51, 102), (245, 0, 61), (184, 0, 46), (255, 51, 204)]
 		self.font = font
 		self.score = 0
+		self.startTime = pygame.time.get_ticks()
 	def draw(self):
 		self.surface.fill((255,255,255))
 		for drawFunc in updateList:
@@ -51,13 +52,13 @@ class Game:
 			self.delay_end = 0
 	def changeDelay(self):
 		self.ticks = pygame.time.get_ticks()
-		if self.ticks > 100000 and self.stage == 2:
+		if self.ticks > (100000 + self.startTime) and self.stage == 2:
 			self.delay = 300
 			# give the player a score bonus
 			self.score += 500
 			self.stage = 3
 			print('STAGE 3')
-		if self.ticks > 50000 and self.stage == 1:
+		if self.ticks > (50000 + self.startTime) and self.stage == 1:
 			self.delay =  500
 			# give the player a score bonus
 			self.score += 100
@@ -66,6 +67,7 @@ class Game:
 	def reset(self):
 		self.delay = 1000
 		self.delay_end = 0
+		self.startTime = pygame.time.get_ticks()
 		self.stage = 1
 		self.score = 0
 		player.health = 3
@@ -78,6 +80,7 @@ pygame.font.init()
 font = pygame.font.Font(None, SCALE)
 game = Game(font, updateList)
 clock = pygame.time.Clock()
+startTime = pygame.time.get_ticks()
 
 
 running = True
@@ -115,13 +118,16 @@ while True:
 		clock.tick(60)
 		#ADD TO SCORE
 		game.score += 0.1
+		#RESTART THE GAME
+		if keys[pygame.K_r]:
+			game.reset()
 	# WHILE AT THE ENDGAME SCREEN
 	if running == False:
 		scoreText = ('final score: %s' % str(round(game.score)).split('.')[0])
 		endText = font.render(scoreText + '    play again? (spacebar)', 1, (100,100,100))
 		game.surface.blit(endText, (SCALE, SCALE))
 		pygame.display.update()
-		if keys[pygame.K_SPACE]:
+		if keys[pygame.K_r]:
 			game.reset()
 			running = True
 
