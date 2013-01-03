@@ -99,10 +99,11 @@ while True:
 			player.move(1)
 		#PLAYER: CHANGE X
 		if keys[pygame.K_SPACE]:
+			player.jumping = True
 			player.x = SCALE * 2
-		if (not keys[pygame.K_SPACE]):
-			player.x = 0	
-		#PLAYER: CHECK HEALTH
+	
+		#PLAYER: OTHER
+		player.jump()
 		player.checkHealth()
 		#LEVEL RELATED
 		game.changeDelay()

@@ -11,11 +11,19 @@ class Player:
 		self.lane = 1
 		# set player's starting health
 		self.health = 3
+		# self.jump is true when jumping or returning after a jump
+		self.jumping = False
 		
 	def move(self, lane):
 		if lane >= 0 and lane <= 2:
 			self.y = lane * self.scale
 			self.lane = lane	
+
+	def jump(self):
+		if self.x <= 0 and self.jumping == True:
+			self.jumping = False
+		elif self.x != 0 and self.jumping == True:
+			self.x -= 4
 	
 	def reset(self):
 		self.y = 1 * self.scale
